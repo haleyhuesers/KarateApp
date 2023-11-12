@@ -13,16 +13,18 @@ namespace KarateApp.mywork
 {
     public partial class member : System.Web.UI.Page
     {
-        /*LoginP loginPage = new LoginP();*/
+        
         SqlConnection dbcon;
         string conn = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\reidm\\OneDrive\\Desktop\\assignment4\\KarateApp\\App_Data\\KarateSchool.mdf;Integrated Security=True;Connect Timeout=30";
         protected void Page_Load(object sender, EventArgs e)
         {
             
-
+            //checks if user is authenticated 
             if (User.Identity.IsAuthenticated)
             {
+                //gets username of authenticated
                 string username = User.Identity.Name;
+                //creates an instance of the login page 
                 login loginPage = new login();
 
                 // Get the current member's ID from your authentication mechanism
@@ -39,7 +41,7 @@ namespace KarateApp.mywork
                     "JOIN Instructor I ON S.Instructor_ID = I.InstructorID " +
                     "WHERE S.Member_ID = @MemberID;";
 
-
+                //connects to database
                 using (SqlConnection connection = new SqlConnection(conn))
                 {
                     // Open the database connection
@@ -55,8 +57,10 @@ namespace KarateApp.mywork
                     GridView1.DataSource = dataTable;
                     GridView1.DataBind();
 
+                    //retrieves member info
                     using (KarateSchoolDataContext dbcon = new KarateSchoolDataContext(conn))
                     {
+                        //query the members table to get first and last name 
                         var memberInfo = dbcon.Members
                         .Where(m => m.Member_UserID == currentMemberID)
                         .Select(m => new
@@ -69,37 +73,15 @@ namespace KarateApp.mywork
 
                         if (memberInfo != null)
                         {
+                            //displays inof in text box
                             Label1.Text = memberInfo.FirstName;
                             Label2.Text = memberInfo.LastName;
                         }
                     }
 
-                    // Set labels to display first name and last name
-                    /*                    if (dataTable.Rows.Count > 0)
-                                        {
-                                            Label1.Text = dataTable.Rows[0]["InstructorFirstName"].ToString();
-                                            Label2.Text = dataTable.Rows[0]["InstructorLastName"].ToString();
-                                        }
-                    */
                 }
             }
 
-
-             int GetMemberIDByUsername(string username)
-            {
-                // Retrieve member ID based on username
-                // This could involve querying your database or using another authentication method
-                // For the sake of this example, we're assuming the username is the member ID
-                int memberID;
-                if (int.TryParse(username, out memberID))
-                {
-                    return memberID;
-                }
-                else
-                {
-                    return -1; // Replace with an appropriate default or error handling
-                }
-            }
             
 
         }

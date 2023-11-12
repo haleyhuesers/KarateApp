@@ -75,29 +75,33 @@ namespace KarateApp.mywork
 
         public int GetUserID(string username)
         {
-            /*string userName = Login1.UserName;*/
+            
             string userIDStr = "";
 
             using (SqlConnection connection = new SqlConnection(conn))
             {
                 connection.Open();
+                //query to select the UserID based on username
                 string query = "SELECT UserID FROM NetUser WHERE UserName = @UserName;";
 
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
+                    //set parameter fot the username in query
                     cmd.Parameters.AddWithValue("@UserName", username);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
+                            //retrieves UserID as a string from the result 
                             userIDStr = reader["UserID"].ToString();
                         }
                     }
                 }
             }
-
+            // Parse the string representation of the UserID to an integer
             int userID = int.Parse(userIDStr);
+            //returns obtained UserID
             return userID;
 
 
