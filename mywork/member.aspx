@@ -10,9 +10,11 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p class="auto-style4">
-        Member
-    </p>
+    <div class="container-fluid bg-warning text-danger">
+        <p class="auto-style4">
+            Member
+        </p>
+    </div>
     <p>
         <span class="auto-style5">First Name:&nbsp;
         </span>

@@ -13,8 +13,10 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p class="auto-style5">
-        Instructor</p>
+   <div class="container-fluid bg-warning text-danger">
+        <p class="auto-style5">
+            Instructor</p>
+    </div>
     <p class="auto-style6">
         First Name:
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

@@ -55,8 +55,12 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <p>
-        <span class="auto-style24">&nbsp;Administrator</span><br />
+    <div class="container-fluid bg-warning text-danger">
+        <p>
+            <span class="auto-style24">&nbsp;Administrator</span><br />
+        </p>
+    </div>
+    <p> 
         <table class="auto-style4">
             <tr>
                 <td class="auto-style10">
